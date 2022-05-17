@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HERO LIST</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <h3 class="row justify-content-center">
+        <%= heroes.title %>
+    </h3>
+
+    <div class="class py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-md-6">
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">name</th>
+                        <th scope="col">role</th>
+                        <th scope="col">senjata</th>
+                        <th scope="col">action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let i = 0; i < heroes.data.length; i++) { %>
+                            <tr>
+                                <td>
+                                    <%= i + 1 %>
+                                </td>
+                                <td>
+                                    <%= heroes.data[i].name %>
+                                </td>
+                                <td>
+                                    <%= heroes.data[i].role %>
+                                </td>
+                                <td>
+                                    <%= heroes.data[i].senjata %>
+                                </td>
+                                <form action="/hero/remove" method="post">
+                                    <td>
+                                        <a href="/hero/<%= heroes.data[i].id %>" onclick="return confirm('yakin edit data?')"class="btn btn-primary btn-xs">Edit</a>
+                                        <input type="text" hidden name="id" value="<%= heroes.data[i].id %>" />
+                                        <input type="submit" onclick="return confirm('yakin hapus data?')" value= "delete" class="btn btn-danger btn-xs"> 
+                                    </td>
+                                </form>
+                            </tr>
+                            <% } %>
+                    </tbody>
+                  </table>
+               </div>
+            </div>
+        </div>
+    </div>
+
+ 
+
+      <h5>TAMBAHKAN HERO</h5>
+      <br/>
+        <div class="box-body">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-2">
+                    <form action="/hero/add" method="post" class="row g-3">
+                        <div class="form-group">
+                            <label for="inputNama" class="form-label"><h5>Nama</h5></label>
+                          <input type="text" class="form-control" name="name" placeholder="Masukan nama hero">           
+                        </div>
+                        <div class="form-group">
+                          <label for="inputRole" class="form-label"><h5>Role</h5></label>
+                          <input type="text" class="form-control" name="role" placeholder="Masukkan role">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSenjata" class="form-label"><h5>Senjata</h5></label>
+                            <input type="text" class="form-control" name="senjata" placeholder="Masukan nama senjata hero">
+                          </div>
+                        <div class="form-group">
+                          <button type="submit" onclick="return confirm('yakin tambah data?')" value="tambahkan" class="btn btn-primary"><h6>Tambahkan</h6></button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>
